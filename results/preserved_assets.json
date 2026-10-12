@@ -1,0 +1,18 @@
+[
+  {
+    "file": "models/paper_model_best.keras",
+    "sha256": "be2eddd7dbe8a38f00901500f6aa2db30c1ffb74462dc6ae5a0feba5bb68dfec"
+  },
+  {
+    "file": "results/samples/y_true_sample.npy",
+    "sha256": "9d3325bf5057e94536b475a3cbe057fc63ea18a060ff9ab5785aa5c247577c23"
+  },
+  {
+    "file": "results/samples/y_pred_sample.npy",
+    "sha256": "5edc2268ccd6c840ee1523251c5d1b640756bd588be662560f3e488c9d1d5c77"
+  },
+  {
+    "file": "results/video/kinematics_demonstration.mp4",
+    "sha256": "d5eae410a5861dcad46d72913e5c1d408968255be7bd01f2135dd9a390db3de4"
+  }
+]

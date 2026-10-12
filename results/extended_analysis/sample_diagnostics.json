@@ -1,0 +1,298 @@
+{
+  "sample_count": 4211,
+  "units": "normalized target amplitude",
+  "prediction_stage": "calibrated and clipped exported predictions",
+  "activity_definition": "abs(target) > 0.05, per axis",
+  "axis_metrics": [
+    {
+      "axis": "Roll",
+      "rmse": 0.11809741559845653,
+      "pearson_cc": 0.8766014729688067,
+      "n_samples": 4211,
+      "mae": 0.03147179881515,
+      "mean_error": -0.001676392408326884,
+      "p95_absolute_error": 0.20101381139823088,
+      "max_absolute_error": 1.1960384128843915,
+      "r_squared": 0.7658833436661961,
+      "zero_baseline_rmse": 0.2441072342153925,
+      "active_samples": 320,
+      "active_rmse": 0.39392701813730263,
+      "near_rest_samples": 3891,
+      "near_rest_rmse": 0.0482904787790219,
+      "saturated_predictions": 91,
+      "activity_threshold": 0.05
+    },
+    {
+      "axis": "Pitch",
+      "rmse": 0.05542710888384287,
+      "pearson_cc": 0.9697441129611339,
+      "n_samples": 4211,
+      "mae": 0.014233142670400075,
+      "mean_error": 0.0040198886699454135,
+      "p95_absolute_error": 0.07366855442523956,
+      "max_absolute_error": 1.042849108901825,
+      "r_squared": 0.9391622677941881,
+      "zero_baseline_rmse": 0.22542270845093706,
+      "active_samples": 286,
+      "active_rmse": 0.1892776987629249,
+      "near_rest_samples": 3925,
+      "near_rest_rmse": 0.026182284923185146,
+      "saturated_predictions": 118,
+      "activity_threshold": 0.05
+    },
+    {
+      "axis": "Yaw",
+      "rmse": 0.10586333020489025,
+      "pearson_cc": 0.8980678277131087,
+      "n_samples": 4211,
+      "mae": 0.026933206882153136,
+      "mean_error": -0.006159276662910526,
+      "p95_absolute_error": 0.13059640675783157,
+      "max_absolute_error": 1.013749067066952,
+      "r_squared": 0.7967169688150294,
+      "zero_baseline_rmse": 0.23483835538781703,
+      "active_samples": 303,
+      "active_rmse": 0.37396625739787714,
+      "near_rest_samples": 3908,
+      "near_rest_rmse": 0.035112352094126484,
+      "saturated_predictions": 58,
+      "activity_threshold": 0.05
+    }
+  ],
+  "joint_mean_absolute_error": 0.024212716122567736,
+  "model_package": {
+    "metadata": {
+      "keras_version": "3.14.0",
+      "date_saved": "2026-06-04@22:24:54"
+    },
+    "layers": [
+      {
+        "class": "InputLayer",
+        "name": "input_layer",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "GaussianNoise",
+        "name": "gaussian_noise",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "Conv1D",
+        "name": "conv1d",
+        "input_shape": [
+          null,
+          600,
+          12
+        ],
+        "filters": 32,
+        "units": null,
+        "kernel_size": [
+          5
+        ],
+        "dilation_rate": [
+          1
+        ],
+        "rate": null
+      },
+      {
+        "class": "BatchNormalization",
+        "name": "batch_normalization",
+        "input_shape": [
+          null,
+          596,
+          32
+        ],
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "MaxPooling1D",
+        "name": "max_pooling1d",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "SpatialDropout1D",
+        "name": "spatial_dropout1d",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": 0.2
+      },
+      {
+        "class": "Conv1D",
+        "name": "conv1d_1",
+        "input_shape": [
+          null,
+          298,
+          32
+        ],
+        "filters": 64,
+        "units": null,
+        "kernel_size": [
+          3
+        ],
+        "dilation_rate": [
+          1
+        ],
+        "rate": null
+      },
+      {
+        "class": "BatchNormalization",
+        "name": "batch_normalization_1",
+        "input_shape": [
+          null,
+          296,
+          64
+        ],
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "MaxPooling1D",
+        "name": "max_pooling1d_1",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "SpatialDropout1D",
+        "name": "spatial_dropout1d_1",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": 0.2
+      },
+      {
+        "class": "LSTM",
+        "name": "lstm",
+        "input_shape": [
+          null,
+          148,
+          64
+        ],
+        "filters": null,
+        "units": 64,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "Dropout",
+        "name": "dropout",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": 0.3
+      },
+      {
+        "class": "GlobalAveragePooling1D",
+        "name": "global_average_pooling1d",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "Dense",
+        "name": "dense",
+        "input_shape": [
+          null,
+          64
+        ],
+        "filters": null,
+        "units": 64,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      },
+      {
+        "class": "Dropout",
+        "name": "dropout_1",
+        "input_shape": null,
+        "filters": null,
+        "units": null,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": 0.3
+      },
+      {
+        "class": "Dense",
+        "name": "dense_1",
+        "input_shape": [
+          null,
+          64
+        ],
+        "filters": null,
+        "units": 3,
+        "kernel_size": null,
+        "dilation_rate": null,
+        "rate": null
+      }
+    ],
+    "compile_config": {
+      "optimizer": {
+        "module": "keras.optimizers",
+        "class_name": "Adam",
+        "config": {
+          "name": "adam",
+          "learning_rate": 6.25000029685907e-05,
+          "weight_decay": null,
+          "clipnorm": null,
+          "global_clipnorm": null,
+          "clipvalue": null,
+          "use_ema": false,
+          "ema_momentum": 0.99,
+          "ema_overwrite_frequency": null,
+          "loss_scale_factor": null,
+          "gradient_accumulation_steps": null,
+          "beta_1": 0.9,
+          "beta_2": 0.999,
+          "epsilon": 1e-07,
+          "amsgrad": false
+        },
+        "registered_name": null
+      },
+      "loss": "mse",
+      "loss_weights": null,
+      "metrics": [
+        "mae"
+      ],
+      "weighted_metrics": null,
+      "run_eagerly": false,
+      "steps_per_execution": 1,
+      "jit_compile": false
+    }
+  }
+}

@@ -1,0 +1,336 @@
+Original notebook cell 3
+Loading and Processing Data for Subject S1...
+Train Data Shape: (8689, 600, 12)
+Test Data Shape:  (4211, 600, 12)
+
+
+Original notebook cell 4
+[1mModel: "sequential_2"[0m
+
+
+Original notebook cell 4
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ gaussian_noise_2                │ ([38;5;45mNone[0m, [38;5;34m600[0m, [38;5;34m12[0m)        │             [38;5;34m0[0m │
+│ ([38;5;33mGaussianNoise[0m)                 │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv1d_4 ([38;5;33mConv1D[0m)               │ ([38;5;45mNone[0m, [38;5;34m596[0m, [38;5;34m32[0m)        │         [38;5;34m1,952[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ batch_normalization_4           │ ([38;5;45mNone[0m, [38;5;34m596[0m, [38;5;34m32[0m)        │           [38;5;34m128[0m │
+│ ([38;5;33mBatchNormalization[0m)            │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ max_pooling1d_4 ([38;5;33mMaxPooling1D[0m)  │ ([38;5;45mNone[0m, [38;5;34m298[0m, [38;5;34m32[0m)        │             [38;5;34m0[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ spatial_dropout1d_4             │ ([38;5;45mNone[0m, [38;5;34m298[0m, [38;5;34m32[0m)        │             [38;5;34m0[0m │
+│ ([38;5;33mSpatialDropout1D[0m)              │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv1d_5 ([38;5;33mConv1D[0m)               │ ([38;5;45mNone[0m, [38;5;34m296[0m, [38;5;34m64[0m)        │         [38;5;34m6,208[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ batch_normalization_5           │ ([38;5;45mNone[0m, [38;5;34m296[0m, [38;5;34m64[0m)        │           [38;5;34m256[0m │
+│ ([38;5;33mBatchNormalization[0m)            │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ max_pooling1d_5 ([38;5;33mMaxPooling1D[0m)  │ ([38;5;45mNone[0m, [38;5;34m148[0m, [38;5;34m64[0m)        │             [38;5;34m0[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ spatial_dropout1d_5             │ ([38;5;45mNone[0m, [38;5;34m148[0m, [38;5;34m64[0m)        │             [38;5;34m0[0m │
+│ ([38;5;33mSpatialDropout1D[0m)              │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ lstm_2 ([38;5;33mLSTM[0m)                   │ ([38;5;45mNone[0m, [38;5;34m148[0m, [38;5;34m64[0m)        │        [38;5;34m33,024[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout_4 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;34m148[0m, [38;5;34m64[0m)        │             [38;5;34m0[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ global_average_pooling1d_2      │ ([38;5;45mNone[0m, [38;5;34m64[0m)             │             [38;5;34m0[0m │
+│ ([38;5;33mGlobalAveragePooling1D[0m)        │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_4 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)             │         [38;5;34m4,160[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout_5 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;34m64[0m)             │             [38;5;34m0[0m │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_5 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m3[0m)              │           [38;5;34m195[0m │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+
+
+Original notebook cell 4
+[1m Total params: [0m[38;5;34m45,923[0m (179.39 KB)
+
+
+Original notebook cell 4
+[1m Trainable params: [0m[38;5;34m45,731[0m (178.64 KB)
+
+
+Original notebook cell 4
+[1m Non-trainable params: [0m[38;5;34m192[0m (768.00 B)
+
+
+Original notebook cell 5
+TRAINING...
+Epoch 1/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 1.2169 - mae: 0.2898
+Epoch 1: val_loss improved from None to 0.87411, saving model to paper_model_best.keras
+
+Epoch 1: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m12s[0m 50ms/step - loss: 1.0967 - mae: 0.2595 - val_loss: 0.8741 - val_mae: 0.1692 - learning_rate: 2.5000e-04
+Epoch 2/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.8074 - mae: 0.2066
+Epoch 2: val_loss improved from 0.87411 to 0.59543, saving model to paper_model_best.keras
+
+Epoch 2: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.7389 - mae: 0.2003 - val_loss: 0.5954 - val_mae: 0.1482 - learning_rate: 2.5000e-04
+Epoch 3/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.5593 - mae: 0.1796
+Epoch 3: val_loss improved from 0.59543 to 0.41944, saving model to paper_model_best.keras
+
+Epoch 3: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.5147 - mae: 0.1760 - val_loss: 0.4194 - val_mae: 0.1332 - learning_rate: 2.5000e-04
+Epoch 4/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.3988 - mae: 0.1622
+Epoch 4: val_loss improved from 0.41944 to 0.30683, saving model to paper_model_best.keras
+
+Epoch 4: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.3710 - mae: 0.1609 - val_loss: 0.3068 - val_mae: 0.1260 - learning_rate: 2.5000e-04
+Epoch 5/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.2958 - mae: 0.1512
+Epoch 5: val_loss improved from 0.30683 to 0.23139, saving model to paper_model_best.keras
+
+Epoch 5: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 48ms/step - loss: 0.2781 - mae: 0.1515 - val_loss: 0.2314 - val_mae: 0.1201 - learning_rate: 2.5000e-04
+Epoch 6/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.2303 - mae: 0.1459
+Epoch 6: val_loss improved from 0.23139 to 0.18419, saving model to paper_model_best.keras
+
+Epoch 6: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.2174 - mae: 0.1440 - val_loss: 0.1842 - val_mae: 0.1193 - learning_rate: 2.5000e-04
+Epoch 7/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 40ms/step - loss: 0.1851 - mae: 0.1413
+Epoch 7: val_loss improved from 0.18419 to 0.15328, saving model to paper_model_best.keras
+
+Epoch 7: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.1753 - mae: 0.1381 - val_loss: 0.1533 - val_mae: 0.1135 - learning_rate: 2.5000e-04
+Epoch 8/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 40ms/step - loss: 0.1534 - mae: 0.1345
+Epoch 8: val_loss improved from 0.15328 to 0.13401, saving model to paper_model_best.keras
+
+Epoch 8: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.1483 - mae: 0.1336 - val_loss: 0.1340 - val_mae: 0.1122 - learning_rate: 2.5000e-04
+Epoch 9/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 40ms/step - loss: 0.1354 - mae: 0.1325
+Epoch 9: val_loss improved from 0.13401 to 0.11760, saving model to paper_model_best.keras
+
+Epoch 9: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.1310 - mae: 0.1303 - val_loss: 0.1176 - val_mae: 0.1059 - learning_rate: 2.5000e-04
+Epoch 10/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 40ms/step - loss: 0.1188 - mae: 0.1270
+Epoch 10: val_loss improved from 0.11760 to 0.11257, saving model to paper_model_best.keras
+
+Epoch 10: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.1173 - mae: 0.1262 - val_loss: 0.1126 - val_mae: 0.1087 - learning_rate: 2.5000e-04
+Epoch 11/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 40ms/step - loss: 0.1120 - mae: 0.1266
+Epoch 11: val_loss improved from 0.11257 to 0.10366, saving model to paper_model_best.keras
+
+Epoch 11: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.1103 - mae: 0.1266 - val_loss: 0.1037 - val_mae: 0.1066 - learning_rate: 2.5000e-04
+Epoch 12/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 40ms/step - loss: 0.1039 - mae: 0.1225
+Epoch 12: val_loss improved from 0.10366 to 0.10145, saving model to paper_model_best.keras
+
+Epoch 12: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 47ms/step - loss: 0.1029 - mae: 0.1225 - val_loss: 0.1014 - val_mae: 0.1058 - learning_rate: 2.5000e-04
+Epoch 13/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.1000 - mae: 0.1225
+Epoch 13: val_loss improved from 0.10145 to 0.09536, saving model to paper_model_best.keras
+
+Epoch 13: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 48ms/step - loss: 0.1010 - mae: 0.1246 - val_loss: 0.0954 - val_mae: 0.1039 - learning_rate: 2.5000e-04
+Epoch 14/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0934 - mae: 0.1198
+Epoch 14: val_loss did not improve from 0.09536
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 48ms/step - loss: 0.0937 - mae: 0.1199 - val_loss: 0.0984 - val_mae: 0.1096 - learning_rate: 2.5000e-04
+Epoch 15/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0926 - mae: 0.1213
+Epoch 15: val_loss improved from 0.09536 to 0.09283, saving model to paper_model_best.keras
+
+Epoch 15: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0911 - mae: 0.1204 - val_loss: 0.0928 - val_mae: 0.1039 - learning_rate: 2.5000e-04
+Epoch 16/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0905 - mae: 0.1205
+Epoch 16: val_loss improved from 0.09283 to 0.09034, saving model to paper_model_best.keras
+
+Epoch 16: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0886 - mae: 0.1188 - val_loss: 0.0903 - val_mae: 0.1044 - learning_rate: 2.5000e-04
+Epoch 17/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0902 - mae: 0.1203
+Epoch 17: val_loss improved from 0.09034 to 0.09021, saving model to paper_model_best.keras
+
+Epoch 17: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0889 - mae: 0.1202 - val_loss: 0.0902 - val_mae: 0.1087 - learning_rate: 2.5000e-04
+Epoch 18/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0888 - mae: 0.1209
+Epoch 18: val_loss improved from 0.09021 to 0.08465, saving model to paper_model_best.keras
+
+Epoch 18: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0883 - mae: 0.1206 - val_loss: 0.0846 - val_mae: 0.1044 - learning_rate: 2.5000e-04
+Epoch 19/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0848 - mae: 0.1196
+Epoch 19: val_loss did not improve from 0.08465
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0836 - mae: 0.1179 - val_loss: 0.0887 - val_mae: 0.0990 - learning_rate: 2.5000e-04
+Epoch 20/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0853 - mae: 0.1198
+Epoch 20: val_loss did not improve from 0.08465
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0847 - mae: 0.1202 - val_loss: 0.0911 - val_mae: 0.1036 - learning_rate: 2.5000e-04
+Epoch 21/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0844 - mae: 0.1200
+Epoch 21: val_loss did not improve from 0.08465
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0816 - mae: 0.1175 - val_loss: 0.0868 - val_mae: 0.1033 - learning_rate: 2.5000e-04
+Epoch 22/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0789 - mae: 0.1163
+Epoch 22: val_loss improved from 0.08465 to 0.08422, saving model to paper_model_best.keras
+
+Epoch 22: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0790 - mae: 0.1162 - val_loss: 0.0842 - val_mae: 0.1021 - learning_rate: 2.5000e-04
+Epoch 23/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0821 - mae: 0.1191
+Epoch 23: val_loss did not improve from 0.08422
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0792 - mae: 0.1163 - val_loss: 0.0853 - val_mae: 0.1031 - learning_rate: 2.5000e-04
+Epoch 24/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0762 - mae: 0.1140
+Epoch 24: val_loss improved from 0.08422 to 0.08020, saving model to paper_model_best.keras
+
+Epoch 24: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0774 - mae: 0.1152 - val_loss: 0.0802 - val_mae: 0.0976 - learning_rate: 2.5000e-04
+Epoch 25/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0761 - mae: 0.1148
+Epoch 25: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0750 - mae: 0.1141 - val_loss: 0.0874 - val_mae: 0.1044 - learning_rate: 2.5000e-04
+Epoch 26/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0770 - mae: 0.1142
+Epoch 26: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0784 - mae: 0.1167 - val_loss: 0.0831 - val_mae: 0.1008 - learning_rate: 2.5000e-04
+Epoch 27/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0791 - mae: 0.1167
+Epoch 27: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0826 - mae: 0.1197 - val_loss: 0.0825 - val_mae: 0.1030 - learning_rate: 2.5000e-04
+Epoch 28/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0791 - mae: 0.1172
+Epoch 28: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0783 - mae: 0.1166 - val_loss: 0.0817 - val_mae: 0.1066 - learning_rate: 2.5000e-04
+Epoch 29/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0771 - mae: 0.1165
+Epoch 29: val_loss did not improve from 0.08020
+
+Epoch 29: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0837 - mae: 0.1226 - val_loss: 0.0887 - val_mae: 0.1085 - learning_rate: 2.5000e-04
+Epoch 30/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0848 - mae: 0.1209
+Epoch 30: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0817 - mae: 0.1179 - val_loss: 0.0833 - val_mae: 0.1030 - learning_rate: 1.2500e-04
+Epoch 31/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0764 - mae: 0.1132
+Epoch 31: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0769 - mae: 0.1145 - val_loss: 0.0809 - val_mae: 0.0982 - learning_rate: 1.2500e-04
+Epoch 32/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0761 - mae: 0.1148
+Epoch 32: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0749 - mae: 0.1133 - val_loss: 0.0851 - val_mae: 0.1032 - learning_rate: 1.2500e-04
+Epoch 33/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0752 - mae: 0.1131
+Epoch 33: val_loss did not improve from 0.08020
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0741 - mae: 0.1125 - val_loss: 0.0818 - val_mae: 0.1021 - learning_rate: 1.2500e-04
+Epoch 34/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0730 - mae: 0.1122
+Epoch 34: val_loss did not improve from 0.08020
+
+Epoch 34: ReduceLROnPlateau reducing learning rate to 6.25000029685907e-05.
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0721 - mae: 0.1110 - val_loss: 0.0818 - val_mae: 0.0999 - learning_rate: 1.2500e-04
+Epoch 35/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0697 - mae: 0.1083
+Epoch 35: val_loss improved from 0.08020 to 0.07873, saving model to paper_model_best.keras
+
+Epoch 35: finished saving model to paper_model_best.keras
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 48ms/step - loss: 0.0693 - mae: 0.1081 - val_loss: 0.0787 - val_mae: 0.0983 - learning_rate: 6.2500e-05
+Epoch 36/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0687 - mae: 0.1080
+Epoch 36: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0681 - mae: 0.1073 - val_loss: 0.0808 - val_mae: 0.0985 - learning_rate: 6.2500e-05
+Epoch 37/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 41ms/step - loss: 0.0689 - mae: 0.1070
+Epoch 37: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 48ms/step - loss: 0.0685 - mae: 0.1070 - val_loss: 0.0813 - val_mae: 0.0987 - learning_rate: 6.2500e-05
+Epoch 38/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0664 - mae: 0.1046
+Epoch 38: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0671 - mae: 0.1057 - val_loss: 0.0826 - val_mae: 0.0986 - learning_rate: 6.2500e-05
+Epoch 39/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0672 - mae: 0.1073
+Epoch 39: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0660 - mae: 0.1061 - val_loss: 0.0816 - val_mae: 0.0986 - learning_rate: 6.2500e-05
+Epoch 40/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0660 - mae: 0.1057
+Epoch 40: val_loss did not improve from 0.07873
+
+Epoch 40: ReduceLROnPlateau reducing learning rate to 3.125000148429535e-05.
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0666 - mae: 0.1061 - val_loss: 0.0829 - val_mae: 0.0987 - learning_rate: 6.2500e-05
+Epoch 41/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0657 - mae: 0.1060
+Epoch 41: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0651 - mae: 0.1054 - val_loss: 0.0812 - val_mae: 0.0987 - learning_rate: 3.1250e-05
+Epoch 42/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 42ms/step - loss: 0.0657 - mae: 0.1066
+Epoch 42: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0649 - mae: 0.1052 - val_loss: 0.0812 - val_mae: 0.0974 - learning_rate: 3.1250e-05
+Epoch 43/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0634 - mae: 0.1043
+Epoch 43: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0630 - mae: 0.1038 - val_loss: 0.0807 - val_mae: 0.0978 - learning_rate: 3.1250e-05
+Epoch 44/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0613 - mae: 0.1012
+Epoch 44: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0633 - mae: 0.1035 - val_loss: 0.0805 - val_mae: 0.0983 - learning_rate: 3.1250e-05
+Epoch 45/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0630 - mae: 0.1022
+Epoch 45: val_loss did not improve from 0.07873
+
+Epoch 45: ReduceLROnPlateau reducing learning rate to 1.5625000742147677e-05.
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0631 - mae: 0.1032 - val_loss: 0.0809 - val_mae: 0.0978 - learning_rate: 3.1250e-05
+Epoch 46/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0639 - mae: 0.1048
+Epoch 46: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0632 - mae: 0.1045 - val_loss: 0.0813 - val_mae: 0.0984 - learning_rate: 1.5625e-05
+Epoch 47/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0621 - mae: 0.1030
+Epoch 47: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0628 - mae: 0.1039 - val_loss: 0.0809 - val_mae: 0.0974 - learning_rate: 1.5625e-05
+Epoch 48/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0622 - mae: 0.1042
+Epoch 48: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0614 - mae: 0.1031 - val_loss: 0.0819 - val_mae: 0.0979 - learning_rate: 1.5625e-05
+Epoch 49/60
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 42ms/step - loss: 0.0631 - mae: 0.1037
+Epoch 49: val_loss did not improve from 0.07873
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 49ms/step - loss: 0.0630 - mae: 0.1035 - val_loss: 0.0839 - val_mae: 0.0995 - learning_rate: 1.5625e-05
+Epoch 50/60
+[1m197/198[0m [32m━━━━━━━━━━━━━━━━━━━[0m[37m━[0m [1m0s[0m 41ms/step - loss: 0.0629 - mae: 0.1036
+Epoch 50: val_loss did not improve from 0.07873
+
+Epoch 50: ReduceLROnPlateau reducing learning rate to 1e-05.
+[1m198/198[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 48ms/step - loss: 0.0622 - mae: 0.1028 - val_loss: 0.0813 - val_mae: 0.0980 - learning_rate: 1.5625e-05
+Epoch 50: early stopping
+Restoring model weights from the end of the best epoch: 35.
+
+
+Original notebook cell 6
+
+Evaluating on TEST data...
+
+
+Original notebook cell 7
+[1m132/132[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m1s[0m 8ms/step
+
+--- Quantitative Evaluation (Test Data) ---
+Axis Roll: RMSE = 0.1306 | Pearson Correlation (CC) = 0.8707
+Axis Pitch: RMSE = 0.0753 | Pearson Correlation (CC) = 0.9634
+Axis Yaw: RMSE = 0.1244 | Pearson Correlation (CC) = 0.8949
+
+
+Original notebook cell 7
+<Figure size 1500x1000 with 3 Axes>

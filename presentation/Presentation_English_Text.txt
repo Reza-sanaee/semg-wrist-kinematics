@@ -1,0 +1,256 @@
+Slide 1
+Recognition of Hand Motions Using sEMG Signals
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+1
+Bachelor’s Degree Project
+Student: Reza Sanaeinejad
+Supervisor: Dr. Mehran Jahed
+Department of Electrical Engineering
+Sharif University of Technology
+Khordad 1405 (May–June 2026)
+
+Slide 2
+Project Overview and Key Objectives
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+2
+The principal objective is to develop a deep learning model for continuously estimating three wrist angles from surface electromyography (sEMG) signals.
+
+The project estimates motion continuously rather than performing discrete classification.
+Roll: inward and outward rotation
+Pitch: upward and downward wrist flexion
+Yaw: leftward and rightward wrist deviation
+Dataset: NinaPro DB2, including movement data and muscle signals sampled at 2,000 Hz.
+
+Slide 3
+Phase 1  Baseline Model Development
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+3
+Objective: construct a baseline architecture that is robust to sEMG noise and prevents data leakage under an intra-subject protocol.
+1  Preprocessing
+Butterworth low-pass filtering (5 Hz) and signal rectification using the absolute value.
+→
+2  Windowing strategy
+600-sample windows (300 milliseconds) provide the complete temporal context of muscular contraction.
+→
+3  Baseline architecture
+A hybrid CNN-LSTM with Huber loss addresses abrupt changes at movement boundaries.
+
+Slide 4
+Phase 1 Evaluation  Stability for a Single Subject
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+4
+Baseline model output: satisfactory accuracy for one particular user.
+The Phase 1 results show that combining convolutional and recurrent networks provides a good understanding of one individual’s movements.
+Reason for proceeding to Phase 2
+Principal limitation: the model was trained exclusively on data from one particular user (intra-subject).
+
+Scientific need: real-world models must generalize across different individuals.
+
+This fundamental limitation motivated pooling data from several users and testing the network’s capabilities.
+
+Slide 5
+Phase 2  Evaluation of a General Inter Subject Model
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+5
+Data from seven different subjects were pooled, with more than 52,000 training windows. Anatomical diversity increased substantially.
+Version 1
+Architecture: Conv1D layers and a conventional unidirectional recurrent layer.
+Approximately 134,000 parameters.
+Reason for proceeding to Phase 3
+Principal limitation: despite the deep architecture, the model exhibited oscillations and confusion when handling diverse data and failed to identify a stable pattern across users.
+Scientific need: improve the model to capture more complex patterns and resist inter-subject variation.
+
+Slide 6
+Phase 3  Spatiotemporal Improvements and Validation
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+6
+Architectural development
+Dilated convolutions: dilation rates of 1, 2, and 4 capture a much broader temporal range without increasing the computational burden.
+
+Savitzky–Golay filtering removes noise during postprocessing without eliminating the peaks.
+Inter subject validation protocols
+The model was evaluated using two rigorous approaches:
+
+1. Leave-One-Subject-Out
+
+2. Global Repetition Split
+
+Slide 7
+Phase 3  Leave One Subject Out Results
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+7
+Phase 3 output under the Leave-One-Subject-Out protocol
+Leave One Subject Out protocol
+The model is trained on all subjects except one and then tested on the held-out subject. This process is repeated for each subject to evaluate performance on unseen data.
+Problem observed in the curves
+The model has considerable difficulty accurately predicting the actual values for a new subject. The predicted curves (red) contain substantial noise and fail to follow the principal patterns and peaks of the actual signal (black). This indicates inadequate generalization to new individuals.
+
+Slide 8
+Biological Signal Variation and the Project’s Change of Approach
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+8
+Phase 3 output under the Global Repetition Split protocol
+Reason for proceeding to the final phase
+Phase 3 demonstrated a scientific finding: covariate shift in sEMG signals across individuals is so substantial that constructing a fully general model that works for a new person without fine-tuning is practically impossible.
+
+Overall solution: return to a subject-specific intra-subject approach in Phase 4, while constructing a fully continuous and physiological model. Discrete labels are converted into smooth biomechanical motions, with the aim of bringing the error close to zero.
+
+Slide 9
+Phase 4  Continuous and Physiological Kinematics
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+9
+Objective: move beyond simple classification and obtain accurate, smooth motion estimates that resemble the actual biomechanics of the human hand.
+Innovation 1  Target Label Smoothing
+A human hand cannot change its angle instantaneously in a square-wave step.
+
+The earlier networks produced high-frequency oscillations when attempting to predict step functions.
+
+A Gaussian low-pass filter with sigma = 400 transformed the target values into continuous curves.
+
+The neural network learned to predict gradual acceleration, reaching a peak, and a smooth stop.
+
+Slide 10
+Final Model Architecture and Its Rationale
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+10
+Why combine CNN and LSTM
+A standalone CNN does not capture the movement sequence. A standalone LSTM is computationally demanding and extracts features poorly from highly fluctuating raw signals.
+
+The hybrid architecture combines the strengths of both approaches.
+Input noise
+GaussianNoise improves robustness to sensor noise.
+1  Conv1D × 2 and L2 regularization
+Extract high-frequency spatial features.
+2  BatchNormalization and MaxPooling
+Accelerate convergence and reduce dimensionality.
+3  SpatialDropout1D  0.2
+Prevent overfitting in spatial feature maps.
+4  LSTM  64 units
+Capture complex long-term temporal dependencies.
+5  GlobalAveragePooling1D
+Aggregate feature maps.
+6  Dense  64 to 3
+Provide linear regression for three motion axes.
+
+Slide 11
+Innovation 2  Gain Calibration for Amplitude Attenuation
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+11
+Challenge
+The MSE loss function causes conservative network behavior. The predictions are temporally aligned, but their amplitudes do not reach the absolute values of ±1.
+Solution and outcome
+A gain calibration factor was applied to the model output:
+y_pred_calibrated = y_pred_smoothed × 1.35
+The outputs were then clipped to the permitted range [−1, +1].
+
+At the final joint angle, this technique produces a completely flat, stable plateau and prevents oscillation.
+
+Slide 12
+Quantitative Evaluation of the Final Model on Test Data
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+12
+Using learning rate reduction strategies such as ReduceLROnPlateau, the final model reached its optimal state at epoch 35.
+
+Slide 13
+Agreement Between Actual and Predicted Angles
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+13
+
+Slide 14
+Overview of the Project’s Development
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+14
+The project progressed through a scientific process from simple classification to accurate continuous estimation.
+Architectural development
+A natural balance between CNN for spatial features and LSTM for temporal sequences.
+Transition to continuous estimation
+Overcoming the limitations of stepwise labels and obtaining smooth biomechanical trajectories using Gaussian filtering.
+Scientific transparency
+Demonstrating covariate shift in EMG signals and consciously selecting the intra-subject approach for the highest attainable accuracy.
+Biomechanical engineering
+Introducing gain calibration to stabilize extreme motion values in real-time prosthesis implementations.
+
+Slide 15
+Supplementary Verification of the Final Implementation
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+15
+The supplied final model contains 45,923 parameters: 45,731 trainable parameters and 192 BatchNormalization statistics.
+Verified configuration
+Two Conv1D layers with 32 and 64 filters use dilation rate 1.
+The recurrent layer is a unidirectional 64-unit LSTM.
+The effective initial learning rate is 0.00025.
+The saved model metadata records Keras 3.14.0.
+Evidence boundaries
+The raw NinaPro recording and executable Phase 1–3 implementations are absent.
+
+Targets in the supplied Phase 4 code are smoothed movement-code surrogates. They are not direct Cyberglove wrist-angle samples.
+
+Slide 16
+Extended Evaluation of the Saved Calibrated Predictions
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+16
+All 4,211 saved observations are retained. Errors are in normalized target-amplitude units.
+These results evaluate the exported predictions after gain and clipping. The original reported table evaluates smoothed predictions before calibration.
+
+Slide 17
+Residual Errors and Their Distribution
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+17
+High overall correlation coexists with occasional large errors. Maximum absolute errors are 1.1960 for Roll, 1.0428 for Pitch, and 1.0137 for Yaw.
+
+Slide 18
+Amplitude Agreement Between Targets and Predictions
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+18
+The diagonal represents exact agreement. Dense near-zero clusters and clipping bands require interpretation alongside residual and activity-conditioned errors.
+
+Slide 19
+Activity Conditioned Errors and the Zero Baseline
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+19
+Active means |target| > 0.05 for each axis. Only 6.8–7.6% of observations are active by this definition; active-state error exceeds near-rest error.
+
+Slide 20
+Methodological Findings and Evaluation Independence
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+20
+Targets and causality
+Movement-code smoothing defines the targets. Physical angle accuracy has not been established.
+
+Forward-backward filtering and centered Gaussian smoothing require future samples and therefore describe offline processing.
+Validation and provenance
+The test arrays are also used for model selection. Independent validation and final testing are needed.
+
+The archived training-window count and batch count are inconsistent at the current batch size. Stored outputs cannot certify one consistent current-code run.
+
+Slide 21
+Reproducibility Checks and the Next Research Experiments
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+21
+Completed checks
+13 regression and diagnostic tests passed.
+
+Synthetic-recording preprocessing matches the source operations exactly.
+
+The model, arrays, and video retain their source checksums.
+Proposed experiments
+Isolate training, validation, and final test repetitions.
+
+Use synchronized measured kinematic targets.
+
+Compare architecture and postprocessing choices under identical partitions.
+
+Measure causal streaming delay and functional control performance.
+The proposed experiments have not been performed on the missing raw dataset.
+
+Slide 22
+References
+Bachelor’s degree project  |  Continuous wrist kinematics using sEMG
+22
+[1] M. Atzori, A. Gijsberts, I. Kuzborskij, S. Elsig, A.-G. M. Hager, O. Deriaz, C. Castellini, H. Müller, and B. Caputo, "Characterization of a Benchmark Database for Myoelectric Movement Classification," IEEE Transactions on Neural Systems and Rehabilitation Engineering, vol. 23, no. 1, pp. 73–83, 2015.
+[2] A. Gijsberts, M. Atzori, C. Castellini, H. Müller, and B. Caputo, "Movement Error Rate for Evaluation of Machine Learning Methods for sEMG-Based Hand Movement Classification," IEEE Transactions on Neural Systems and Rehabilitation Engineering, vol. 22, no. 4, pp. 735–744, 2014.
+[3] T. Bao, S. A. R. Zaidi, S. Xie, P. Yang, and Z. Zhang, "A CNN-LSTM Hybrid Framework for Wrist Kinematics Estimation Using Surface Electromyography," arXiv preprint arXiv:1912.00799, 2019.
+[4] F. Quivira, T. Koike-Akino, Y. Wang, and D. Erdogmus, "Translating sEMG Signals to Continuous Hand Poses Using Recurrent Neural Networks," in Proc. IEEE EMBS International Conference on Biomedical & Health Informatics (BHI), 2018, pp. 166–169.
+[5] J. Du, Z. Liu, W. Dong, W. Zhang, and Z. Miao, "A Novel TCN-LSTM Hybrid Model for sEMG-Based Continuous Estimation of Wrist Joint Angles," Sensors, vol. 24, no. 17, p. 5631, 2024.
+[6] A. Ameri, M. A. Akhaee, E. Scheme, and K. Englehart, "Regression Convolutional Neural Network for Improved Simultaneous EMG Control," Journal of Neural Engineering, vol. 16, no. 3, 036015, 2019.
+[7] M. Atzori, M. Cognolato, and H. Müller, "Deep Learning with Convolutional Neural Networks Applied to Electromyography Data: A Resource for the Classification of Movements for Prosthetic Hands," Frontiers in Neurorobotics, vol. 10, p. 9, 2016.

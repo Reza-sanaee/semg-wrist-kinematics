@@ -1,0 +1,12 @@
+# Core data processing and evaluation
+numpy
+scipy
+scikit-learn
+matplotlib
+# Training and model loading
+tensorflow
+# Interactive 3D replay
+vpython
+# Notebook execution
+jupyterlab
+ipykernel

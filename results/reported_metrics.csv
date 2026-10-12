@@ -1,0 +1,4 @@
+axis,rmse,pearson_cc
+Roll,0.1306,0.8707
+Pitch,0.0753,0.9634
+Yaw,0.1244,0.8949
